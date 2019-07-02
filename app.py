@@ -11,6 +11,11 @@ digits = string.digits
 
 @app.route("/")
 def index():
+    return render_template("index.html")
+
+
+@app.route("/password", methods=["POST"])
+def password():
     return render_template("index.html", password=generate_pw())
 
 
