@@ -15,9 +15,14 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/new", methods=["POST"])
+@app.route("/generate")
+def generate():
+    return render_template("generator.html")
+
+
+@app.route("/generate/new", methods=["POST"])
 def password():
-    return render_template("index.html", password=generate_pw(), mail=get_mail())
+    return render_template("generator.html", password=generate_pw(), mail=get_mail())
 # utility website - pw generator, amazon proize tracker: mit discord verbinden
 
 @app.route("/buy")

@@ -2,22 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>MyPassword</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="/static/index.js"></script>
+    <title>Toolsite</title>
 </head>
 <body>
-<div align="center">
-    <form action="/new", method="post">
-        <input type="submit" value="Generate new data">
+    <h1>MyToolsite</h1>
+    <form action="/generate">
+        <input type="submit" value="Password/Fakemail generator">
     </form>
-    <br>
-    <input type="text" id="password" value={{password}}>
-    <button onclick="copy_password()">Copy</button>
-    <input type="text" id="fakemail" value="{{mail}}">
-    <button onclick="copy_mail()">Copy</button>
-</div>
 </body>
-
-
 </html>
