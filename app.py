@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 import random
 import string
-
+from src.mailscraper import get_mail
 app = Flask(__name__)
 
 lower = string.ascii_lowercase
@@ -9,15 +9,20 @@ upper = string.ascii_uppercase
 punc = string.punctuation
 digits = string.digits
 
+
 @app.route("/")
 def index():
     return render_template("index.html")
 
 
-@app.route("/password", methods=["POST"])
+@app.route("/new", methods=["POST"])
 def password():
-    return render_template("index.html", password=generate_pw())
+    return render_template("index.html", password=generate_pw(), mail=get_mail())
+# utility website - pw generator, amazon proize tracker: mit discord verbinden
 
+@app.route("/buy")
+def buy():
+    return "test"
 
 def generate_pw():
     char = lower + upper + punc + digits
