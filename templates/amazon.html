@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Toolsite</title>
+    <link rel="stylesheet" href="/static/pricetracker.css">
+</head>
+<body>
+    <h1>Watchlist:</h1>
+    <form method="post">
+        <input name="name" value="Productname">
+        <input name="url" value="url of product">
+        <input name="price" value="Wishprice">
+        <input type="submit" value="Add to Watchlist">
+    </form>
+    {% for item in items %}
+        <div id="box">
+            <h2>{{ item.Name }}</h2>
+            <a href={{item.url}}>Link</a>
+            <h3>Price on amazon: {{ item.amazon_price }}</h3>
+            <h3>Price you want to have:{{ item.price }}</h3>
+            <form action="/amazon">
+                <input type="submit" value="delete">
+            </form>
+        </div>
+    {% endfor %}
+</body>
+</html>

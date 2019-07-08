@@ -1,7 +1,10 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import random
 import string
 from src.mailscraper import get_mail
+from src.pricescraper import to_json, get_price, check_price
+import json
+import time
 app = Flask(__name__)
 
 lower = string.ascii_lowercase
@@ -25,9 +28,24 @@ def password():
     return render_template("generator.html", password=generate_pw(), mail=get_mail())
 # utility website - pw generator, amazon proize tracker: mit discord verbinden
 
-@app.route("/buy")
-def buy():
-    return "test"
+@app.route("/amazon")
+def amazon():
+    with open("./src/articles.json") as fp:
+        t = json.load(fp)
+    #check_price()
+    return render_template("amazon.html", items=t)
+
+
+@app.route("/amazon", methods=["POST"])
+def get():
+    url = request.form["url"]
+    price = request.form["price"]
+    name = request.form["name"]
+    to_json(name, url, price)
+    with open("./src/articles.json") as fp:
+        t = json.load(fp)
+    #check_price()
+    return render_template("amazon.html", items=t)
 
 def generate_pw():
     char = lower + upper + punc + digits
