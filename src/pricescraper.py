@@ -12,7 +12,7 @@ def get_price(item_url:str):
 
 
 def check_price():
-    with open("articles.json") as fp:
+    with open("./src/articles.json") as fp:
         items = json.load(fp)
     for i in items:
         if i["price"] == i["amazon_price"]: # geht nicht
@@ -38,3 +38,14 @@ def to_json(name:str, item_url:str, price:str):
 
     with open("./src/articles.json", "w") as fp:
         json.dump(data_list, fp, indent=2)
+
+
+def update_price():
+    with open("./src/articles.json") as fp:
+        data_list = json.load(fp)
+    NEW = []
+    for dic in data_list:
+        dic.update(amazon_price=get_price(dic["url"]))
+        NEW.append(dic)
+    with open("./src/articles.json", "w") as fp:
+        json.dump(NEW, fp, indent=2)

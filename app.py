@@ -2,9 +2,8 @@ from flask import Flask, render_template, request
 import random
 import string
 from src.mailscraper import get_mail
-from src.pricescraper import to_json, get_price, check_price
+from src.pricescraper import to_json, get_price, check_price, update_price
 import json
-import time
 app = Flask(__name__)
 
 lower = string.ascii_lowercase
@@ -30,9 +29,10 @@ def password():
 
 @app.route("/amazon")
 def amazon():
+    #check_price()
+    update_price()
     with open("./src/articles.json") as fp:
         t = json.load(fp)
-    #check_price()
     return render_template("amazon.html", items=t)
 
 
