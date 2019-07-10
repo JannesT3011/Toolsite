@@ -8,20 +8,17 @@ def get_price(item_url:str):
     page = requests.get(item_url, headers=headers)
     bs = BeautifulSoup(page.content, "html.parser")
     price = bs.find(id="priceblock_ourprice").get_text()
-    return price
+    return price.split("€")[0][:-1]
 
 
 def check_price():
     with open("./src/articles.json") as fp:
         items = json.load(fp)
     for i in items:
-        if i["price"] == i["amazon_price"]: # geht nicht
-            print(True)
-        else:
-            print(False)
-            print(i["price"])
-            print(get_price(i["url"]))
-
+        if i["amazon_price"] <= i["price"]:
+            #send_notify()
+            print(i["Name"])
+            continue
 
 
 def to_json(name:str, item_url:str, price:str):

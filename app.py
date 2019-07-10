@@ -33,6 +33,7 @@ def amazon():
     update_price()
     with open("./src/articles.json") as fp:
         t = json.load(fp)
+    check_price()
     return render_template("amazon.html", items=t)
 
 

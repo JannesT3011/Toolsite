@@ -13,12 +13,14 @@
         <input name="price" value="Wishprice">
         <input type="submit" value="Add to Watchlist">
     </form>
+    <br>
+    <strong>Note: Don't use "€" or any other symbol!</strong>
     {% for item in items %}
         <div id="box">
             <h2>{{ item.Name }}</h2>
             <a href={{item.url}}>Link</a>
-            <h3>Price on amazon: {{ item.amazon_price }}</h3>
-            <h3>Price you want to have:{{ item.price }}</h3>
+            <h3>Price on amazon: {{ item.amazon_price }} €</h3>
+            <h3>Price you want to have:{{ item.price }} €</h3>
             <form action="/amazon">
                 <input type="submit" value="delete">
             </form>
@@ -27,6 +29,10 @@
     <br>
     <form action="/">
         <input type="submit" value="HOME!">
+    </form>
+    <br>
+    <form action="/amazon">
+        <input type="submit" value="Refresh">
     </form>
 </body>
 </html>
