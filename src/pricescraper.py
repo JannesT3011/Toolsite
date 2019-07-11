@@ -2,9 +2,10 @@ import requests
 from bs4 import BeautifulSoup
 import json
 from src import send_mail
+from config import my_user_agent
 
 def get_price(item_url:str):
-    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0"}
+    headers = {"User-Agent": my_user_agent}
     page = requests.get(item_url, headers=headers)
     bs = BeautifulSoup(page.content, "html.parser")
     price = bs.find(id="priceblock_ourprice").get_text()
