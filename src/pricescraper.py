@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import json
-
+from src import send_mail
 
 def get_price(item_url:str):
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0"}
@@ -16,8 +16,7 @@ def check_price():
         items = json.load(fp)
     for i in items:
         if i["amazon_price"] <= i["price"]:
-            #send_notify()
-            print(i["Name"])
+            send_mail(i)
             continue
 
 
@@ -29,6 +28,7 @@ def to_json(name:str, item_url:str, price:str):
     data["Name"] = name
     data["url"] = item_url
     data["price"] = price
+    data["notify"] = "False"
     if not item_url is None:
         data["amazon_price"] = get_price(item_url)
     data_list.append(data)
